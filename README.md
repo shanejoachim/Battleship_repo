@@ -1,2 +1,2 @@
-# you-sunk-my-battleship
+# Battleship ~ Git
 Battleship
