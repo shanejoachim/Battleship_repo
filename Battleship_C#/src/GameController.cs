@@ -251,8 +251,7 @@ public static class GameController
 	{
 		switch (result.Value) {
 			case ResultOfAttack.Miss:
-				if (object.ReferenceEquals(_theGame.Player, ComputerPlayer))
-					AIAttack();
+			SwitchState(GameState.EndingGame);
 				break;
 			case ResultOfAttack.GameOver:
 				SwitchState(GameState.EndingGame);
