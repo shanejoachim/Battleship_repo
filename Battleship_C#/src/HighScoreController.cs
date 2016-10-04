@@ -181,7 +181,7 @@ static class HighScoreController
 			//position your entry box
 			if (!SwinGame.ReadingText())
 				{
-					SwinGame.StartReadingText(Color.White, NAME_WIDTH, SwinGame.LoadFont("Courier"), x, ENTRY_TOP);
+					SwinGame.StartReadingText(Color.White, NAME_WIDTH, GameResources.GameFont("Courier"), x, ENTRY_TOP);
 				}
 
 			//Read the text from the user
