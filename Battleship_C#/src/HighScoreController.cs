@@ -183,7 +183,7 @@ static class HighScoreController
 			do 
 			{
 				//position your entry box
-				SwinGame.StartReadingText(Color.White, NAME_WIDTH, GameResources.GameFont("Courier"), x, ENTRY_TOP);
+				SwinGame.StartReadingText(Color.White, NAME_WIDTH, SwinGame.LoadFont("Arial", 12), x -5, ENTRY_TOP + 2);
 
 				//Read the text from the user
 				while (SwinGame.ReadingText()) 
@@ -206,6 +206,22 @@ static class HighScoreController
 				s.Name = SwinGame.TextReadAsASCII();
 			} 
 			while (s.Name.Length == 0);
+=======
+			SwinGame.StartReadingText(Color.White, NAME_WIDTH, SwinGame.LoadFont("Arial", 12), x -5, ENTRY_TOP + 2);
+
+			//Read the text from the user
+			while (SwinGame.ReadingText()) {
+				SwinGame.ProcessEvents();
+
+				UtilityFunctions.DrawBackground();
+				DrawHighScores();
+
+				SwinGame.DrawText("Name: ", Color.White, GameResources.GameFont("Courier"), SCORES_LEFT, ENTRY_TOP);
+				SwinGame.RefreshScreen();
+			}
+
+			s.Name = SwinGame.TextReadAsASCII();
+>>>>>>> bug_fix_6
 
 			if (s.Name.Length < 3) {
 				s.Name = s.Name + new string(Convert.ToChar(" "), 3 - s.Name.Length);
