@@ -178,22 +178,34 @@ static class HighScoreController
 			int x = 0;
 			x = SCORES_LEFT + SwinGame.TextWidth(GameResources.GameFont("Courier"), "Name: ");
 
-			//position your entry box
-			SwinGame.StartReadingText(Color.White, NAME_WIDTH, GameResources.GameFont("Courier"), x, ENTRY_TOP);
+			s.Name = "placeholder";
 
-			//Read the text from the user
-			while (SwinGame.ReadingText()) {
-				SwinGame.ProcessEvents();
+			do 
+			{
+				//position your entry box
+				SwinGame.StartReadingText(Color.White, NAME_WIDTH, GameResources.GameFont("Courier"), x, ENTRY_TOP);
 
-				UtilityFunctions.DrawBackground();
-				DrawHighScores();
+				//Read the text from the user
+				while (SwinGame.ReadingText()) 
+				{
+					SwinGame.ProcessEvents();
 
-				//Draws the text "Name:" at position with font
-				SwinGame.DrawText("Name: ", Color.White, GameResources.GameFont("Courier"), SCORES_LEFT, ENTRY_TOP);
-				SwinGame.RefreshScreen();
-			}
+					UtilityFunctions.DrawBackground();
+					DrawHighScores();
 
-			s.Name = SwinGame.TextReadAsASCII();
+					//Draws the text "Name:" at position with font
+					SwinGame.DrawText("Name: ", Color.White, GameResources.GameFont("Courier"), SCORES_LEFT, ENTRY_TOP);
+					
+					if (s.Name.Length == 0)
+					{
+						SwinGame.DrawText("Error: Please enter a name", Color.Red, GameResources.GameFont("Courier"), SCORES_LEFT -1, ENTRY_TOP-12);					
+					}
+					SwinGame.RefreshScreen();
+				}
+
+				s.Name = SwinGame.TextReadAsASCII();
+			} 
+			while (s.Name.Length == 0);
 
 			if (s.Name.Length < 3) {
 				s.Name = s.Name + new string(Convert.ToChar(" "), 3 - s.Name.Length);
